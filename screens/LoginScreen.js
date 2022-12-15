@@ -1,14 +1,9 @@
-
-import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Input, NativeBaseProvider, Button, Icon} from 'native-base';
-
-import { useNavigation } from '@react-navigation/native';
-import {PageLogo} from './../components/styles';
+import { useNavigation } from '@react-navigation/core'
+import React, { useEffect, useState } from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
 
-
-function Login() {
+const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -45,13 +40,10 @@ function Login() {
   }
 
   return (
-    <View style={styles.container}>
-      <PageLogo resizeMode="cover" source={require('./../assets/images.png')} />
-      <View style={styles.text2}>
-        <Text>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Signup")} ><Text style={styles.signupText}> Sign up</Text></TouchableOpacity>
-      </View>
-      
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+    >
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -82,87 +74,55 @@ function Login() {
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
-    
-
-    
-     
-      
-    </View>
-  );
-}
-
-export default () => {
-  return (
-    <NativeBaseProvider>
-     
-        <Login />
-      
-    </NativeBaseProvider>
+    </KeyboardAvoidingView>
   )
 }
 
+export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  LoginText: {
-    marginTop:100,
-    fontSize:30,
-    fontWeight:'bold',
+  inputContainer: {
+    width: '80%'
   },
-  Middle:{
-    alignItems:'center',
-    justifyContent:'center',
+  input: {
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
   },
-  text2:{
-    flexDirection:'row',
-    justifyContent:'center',
-    paddingTop:5
+  buttonContainer: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
   },
-  signupText:{
-    fontWeight:'bold'
+  button: {
+    backgroundColor: '#0782F9',
+    width: '100%',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
   },
-  emailField:{
-    marginTop:30,
-    marginLeft:15
+  buttonOutline: {
+    backgroundColor: 'white',
+    marginTop: 5,
+    borderColor: '#0782F9',
+    borderWidth: 2,
   },
-  emailInput:{
-    marginTop:10,
-    marginRight:5
+  buttonText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 16,
   },
-  buttonStyle:{
-    marginTop:30,
-    marginLeft:15,
-    marginRight:15
+  buttonOutlineText: {
+    color: '#0782F9',
+    fontWeight: '700',
+    fontSize: 16,
   },
-  buttonStyleX:{
-    marginTop:12,
-    marginLeft:15,
-    marginRight:15
-  },
-  buttonDesign:{
-    backgroundColor:'#026efd'
-  },
-  lineStyle:{
-    flexDirection:'row',
-    marginTop:30,
-    marginLeft:15,
-    marginRight:15,
-    alignItems:'center'
-  },
-  imageStyle:{
-    width:80,
-    height:80,
-    marginLeft:20,
-  },
-  boxStyle:{
-    flexDirection:'row',
-    marginTop:30,
-    marginLeft:15,
-    marginRight:15,
-    justifyContent:'space-around'
-  },
-});
+})
